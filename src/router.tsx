@@ -1,9 +1,13 @@
+import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import Root from './routes/root.tsx';
 import Login from './routes/login';
 import App from './routes/app';
-import Foo from './routes/foo';
-import Bar from './routes/bar';
+
+/* eslint-disable react-refresh/only-export-components */
+const Foo = lazy(async () => import('./routes/foo'));
+const Bar = lazy(async () => import('./routes/bar'));
+/* eslint-enable react-refresh/only-export-components */
 
 export const router = createBrowserRouter([
   {

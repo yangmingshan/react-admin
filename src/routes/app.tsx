@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { Layout, Menu, Button } from 'antd';
+import { Spin, Layout, Menu, Button } from 'antd';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -19,7 +19,7 @@ export default function App() {
   };
 
   return (
-    <Layout className="min-h-[100vh]">
+    <Layout className="min-h-screen">
       <Layout.Sider trigger={null} collapsed={collapsed}>
         <div className="h-[32px] m-[16px] bg-[#ffffff20] rounded-[6px]" />
         <Menu
@@ -50,7 +50,15 @@ export default function App() {
           />
         </Layout.Header>
         <Layout.Content className="my-[24px] mx-[16px] p-[24px] bg-white">
-          <Outlet />
+          <Suspense
+            fallback={
+              <div className="w-full h-full flex justify-center items-center">
+                <Spin />
+              </div>
+            }
+          >
+            <Outlet />
+          </Suspense>
         </Layout.Content>
       </Layout>
     </Layout>
